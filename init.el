@@ -1,7 +1,7 @@
 ;;; package --- Summary
 ;;; Commentary:
 ;;; Code:
- 
+
 (setq inhibit-startup-screen t)
 
 ;; mouse-scroll
@@ -23,14 +23,85 @@
 (unless (package-installed-p 'use-package)
   (package-refresh-contents)
   (package-install 'use-package))
+(use-package auto-compile
+  :config (auto-compile-on-load-mode))
+(setq load-prefer-newer t)
+
+;; Load secrets
+;; I keep slightly more sensitive information in a separate file so that I can easily publish my main configuration.
+(load "~/.emacs.secrets" t)
+
+;; Backups
+(setq backup-directory-alist '(("." . "~/.emacs.d/backups")))
+(setq delete-old-versions -1)
+(setq version-control t)
+(setq vc-make-backup-files t)
+(setq auto-save-file-name-transforms '((".*" "~/.emacs.d/auto-save-list/" t)))
+
+;; History
+(setq savehist-file "~/.emacs.d/savehist")
+(savehist-mode 1)
+(setq history-length t)
+(setq history-delete-duplicates t)
+(setq savehist-save-minibuffer-history 1)
+(setq savehist-additional-variables
+      '(kill-ring
+        search-ring
+        regexp-search-ring))
+
+; Recent open files
+(use-package recentf
+  :init
+  (recentf-mode)
+  :config
+  (setq recentf-max-saved-items 200
+        recentf-max-menu-items 15)
+)
+
+; Winner mode - undo and redo window configuration
+(use-package winner
+  :defer t)
 
 ;; warn when opening files bigger than 100MB
 (setq large-file-warning-threshold 100000000)
+
+;; When you start typing and text is selected, replace it with what you are typing, or pasting, or whatever. 65
+(delete-selection-mode 1)
+
+(column-number-mode 1)
+(display-time-mode 1)
+(setq display-time-format "%l:%M%p")
+
+(tool-bar-mode -1)
 
 ;; cua-mode (sane keys)
 (cua-mode t)
 (transient-mark-mode 1) ;; No region when it is not highlighted
 
+;;  When you load modes, most of them show up in the minibuffer.
+;; After you read their name a few thousand times, you eventually quite forgetting that you loaded them
+;; and need a diminished reminder.
+(require 'diminish)
+
+;; Whitespace mode ?????
+(require 'whitespace)
+(setq whitespace-style '(face tabs empty trailing lines-tail trailing lines tab-mark))
+(setq whitespace-line-column 120)
+(global-whitespace-mode 1)
+(eval-after-load "diminish"
+  '(progn
+     (eval-after-load "whitespace"
+       '(diminish 'global-whitespace-mode "ᗣ"))
+     (eval-after-load "whitespace"
+       '(diminish 'whitespace-mode ""))))
+
+;; Make it easier to answer questions.
+(fset 'yes-or-no-p 'y-or-n-p)
+;; It often displays so much information, even temporarily, that it is nice to give it some room to breath. 67
+(setq resize-mini-windows t)
+(setq max-mini-window-height 0.33)
+
+;; SHIFT-arrow change window
 (when (fboundp 'windmove-default-keybindings)
   (windmove-default-keybindings))
 
@@ -47,6 +118,7 @@
     :init (smex-initialize)
     :bind ("M-x" . smex))
   (use-package ido-yes-or-no
+    :disabled ; (easier way used)
     :init (ido-yes-or-no-mode 1))
   :config
   ; disable ido (format "message" format-args)aces to see flx highlights.
@@ -60,7 +132,7 @@
   :bind
   :disabled
   (:map ivy-mode-map
-	("C-'" . ivy-avy))
+        ("C-'" . ivy-avy))
   :init
   (use-package swiper)
   (use-package counsel)
@@ -76,9 +148,9 @@
   (setq ivy-initial-inputs-alist nil)
   ;; configure regexp engine.
   (setq ivy-re-builders-alist
-	;; allow input not in order
+        ;; allow input not in order
         '((t   . ivy--regex-ignore-order)))
-  
+
   (global-set-key (kbd "C-s") 'swiper)
   (global-set-key (kbd "M-x") 'counsel-M-x)
   (global-set-key (kbd "C-x C-f") 'counsel-find-file)
@@ -108,6 +180,10 @@
   :config
   (set-face-foreground 'rainbow-delimiters-depth-1-face "orange red")
   (set-face-foreground 'rainbow-delimiters-depth-2-face "deep sky blue")
+  (set-face-foreground 'rainbow-delimiters-depth-3-face "lime green")
+  (set-face-foreground 'rainbow-delimiters-depth-4-face "medium orchid")
+  (set-face-foreground 'rainbow-delimiters-depth-5-face "snow")
+  (set-face-foreground 'rainbow-delimiters-depth-6-face "chocolate2")
 
   )
 
@@ -168,6 +244,39 @@
   (global-company-mode 1)
 )
 
+(use-package avy)
+
+(use-package key-chord
+  :init (key-chord-mode +1)
+  :config
+  (key-chord-define-global "uu" 'undo-tree-visualize)
+    (key-chord-define-global "jr"     'my/goto-random-char-hydra/my/goto-random-char)
+    (key-chord-define-global "kk"     'my/org/body)
+    (key-chord-define-global "jj"     'avy-goto-word-1)
+    ;(key-chord-define-global "yy"    'my/window-movement/body)
+    (key-chord-define-global "yy" 'browse-kill-ring)
+    (key-chord-define-global "jw"     'switch-window)
+    (key-chord-define-global "jl"     'avy-goto-line)
+    (key-chord-define-global "jk" 'avy-goto-char)
+    (key-chord-define-global "j."     'join-lines/body)
+    ;(key-chord-define-global "jZ"     'avy-zap-to-char)
+    (key-chord-define-global "FF"     'find-file)
+    (key-chord-define-global "qq"     'my/quantified-hydra/body)
+    (key-chord-define-global "hh"     'my/key-chord-commands/body)
+    ;(key-chord-define-global "xx"     'er/expand-region)
+    (key-chord-define-global "xx" 'execute-extended-command)
+    ;(key-chord-define-global "  "     'my/insert-space-or-expand)
+    (key-chord-define-global "JJ" 'crux-switch-to-previous-buffer)
+    )
+
+(use-package guide-key
+  :defer t
+  :diminish guide-key-mode
+  :config
+  :disabled
+  (progn
+  (setq guide-key/guide-key-sequence '("C-x" "C-x r" "C-x 4" "C-c"))
+  (guide-key-mode 1)))  ; Enable guide-key-mode
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; checking ;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -202,7 +311,7 @@
   (use-package flycheck-irony)
   (use-package irony-eldoc)
   :config
-  
+
   (add-hook 'c++-mode-hook 'irony-mode)
   (add-hook 'c-mode-hook 'irony-mode)
   (add-hook 'objc-mode-hook 'irony-mode)
@@ -212,6 +321,9 @@
   ; Load with `irony-mode` as a grouped backend
   (eval-after-load 'flycheck
     '(add-hook 'flycheck-mode-hook #'flycheck-irony-setup))
+  )
+
+(use-package rtags
   )
 
 (use-package eldoc
@@ -254,6 +366,15 @@
 
 
 
+(defun prelude-copy-file-name-to-clipboard ()
+  "Copy the current buffer file name to the clipboard."
+  (interactive)
+  (let ((filename (if (equal major-mode 'dired-mode)
+                      default-directory
+                    (buffer-file-name))))
+    (when filename
+      (kill-new filename)
+      (message "Copied buffer file name '%s' to the clipboard." filename))))
 
 
 
@@ -299,7 +420,8 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(ecb-options-version "2.50")
- '(package-selected-packages (quote (use-package))))
+ '(flycheck-display-errors-function (function flycheck-pos-tip-error-messages))
+ '(package-selected-packages (quote (magit rtags avy key-chord guide-key use-package))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
