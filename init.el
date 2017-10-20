@@ -14,6 +14,7 @@
 ;; Add melpa repositories
 (require 'package)
 (setq package-enable-at-startup nil)
+(setq use-package-verbose t)
 (setq use-package-always-ensure t)
 (add-to-list 'package-archives
              '("melpa" . "https://melpa.org/packages/"))
