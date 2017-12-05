@@ -1,0 +1,14 @@
+auto-save-list
+backups
+elpa
+irony
+semanticdb
+
+# temp files
+smex-items
+recentf
+bookmarks
+ede-projects.el
+ido.last
+savehist
+session.*
