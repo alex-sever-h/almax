@@ -367,7 +367,10 @@
     (setq undo-tree-visualizer-diff t)
     ))
 
-
+(use-package magit
+  :init 
+  (use-package magit-rockstar)
+  (use-package magit-gh-pulls))
 
 
 (defun prelude-copy-file-name-to-clipboard ()
