@@ -81,7 +81,7 @@
 ;;  When you load modes, most of them show up in the minibuffer.
 ;; After you read their name a few thousand times, you eventually quite forgetting that you loaded them
 ;; and need a diminished reminder.
-(require 'diminish)
+(use-package diminish)
 
 ;; Whitespace mode ?????
 (require 'whitespace)
