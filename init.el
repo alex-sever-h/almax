@@ -372,6 +372,11 @@
   (use-package magit-rockstar)
   (use-package magit-gh-pulls))
 
+(use-package arduino-mode
+  :config
+  (setq ede-arduino-appdir "/Applications/Arduino.app/Contents/Resources/Java"))
+
+
 
 (defun prelude-copy-file-name-to-clipboard ()
   "Copy the current buffer file name to the clipboard."
