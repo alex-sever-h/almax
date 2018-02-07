@@ -430,7 +430,7 @@
  '(flycheck-display-errors-function (function flycheck-pos-tip-error-messages))
  '(package-selected-packages
    (quote
-    (magit-filenotify magit-find-file magit-gh-pulls magit rtags avy key-chord guide-key use-package))))
+    (2048-game magit-filenotify magit-find-file magit-gh-pulls magit rtags avy key-chord guide-key use-package))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
