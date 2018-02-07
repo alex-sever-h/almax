@@ -264,7 +264,7 @@
     (key-chord-define-global "jk" 'avy-goto-char)
     (key-chord-define-global "j."     'join-lines/body)
     ;(key-chord-define-global "jZ"     'avy-zap-to-char)
-    (key-chord-define-global "FF"     'find-file)
+    ;(key-chord-define-global "FF"     'find-file)
     (key-chord-define-global "qq"     'my/quantified-hydra/body)
     (key-chord-define-global "hh"     'my/key-chord-commands/body)
     ;(key-chord-define-global "xx"     'er/expand-region)
