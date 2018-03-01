@@ -453,4 +453,6 @@
  ;; If there is more than one, they won't work right.
  )
 
+(scroll-bar-mode -1)
+
 (load-theme 'manoj-dark)
