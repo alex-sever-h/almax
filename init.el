@@ -109,6 +109,15 @@
 (when (fboundp 'windmove-default-keybindings)
   (windmove-default-keybindings))
 
+;; interpret ANSI colors in compilation
+(use-package ansi-color
+  :init
+  (defun colorize-compilation-buffer ()
+    (toggle-read-only)
+    (ansi-color-apply-on-region compilation-filter-start (point))
+    (toggle-read-only))
+  (add-hook 'compilation-filter-hook 'colorize-compilation-buffer)
+)
 ;; ido-mode
 (use-package ido
   :init
