@@ -201,14 +201,15 @@
   )
 
 ;; Color theme
-(use-package color-theme
-  :ensure t
-  :config
-  (color-theme-initialize)
-  (color-theme-charcoal-black)
-  )
-(use-package powerline
-  :config (powerline-default-theme))
+;(use-package color-theme
+;  :ensure t
+;  :config
+;  (color-theme-initialize)
+;  (color-theme-charcoal-black)
+;  )
+
+;(use-package powerline
+;  :config (powerline-default-theme))
 
 (use-package yasnippet
   :disabled
@@ -451,3 +452,5 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  )
+
+(load-theme 'manoj-dark)
