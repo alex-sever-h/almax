@@ -174,6 +174,8 @@
   (global-set-key (kbd "<f2> u") 'counsel-unicode-char)
   )
 
+(use-package markdown-mode)
+
 (use-package smartparens
   :init
   (smartparens-global-mode 1)
