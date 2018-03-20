@@ -461,3 +461,15 @@
 (scroll-bar-mode -1)
 
 (load-theme 'manoj-dark)
+
+(defun compile-parent (command)
+  (interactive
+   (let* ((make-directory (locate-dominating-file (buffer-file-name)
+                                                  "Makefile"))
+          (command (concat "make -k -C "
+                           (shell-quote-argument make-directory))))
+     (list (compilation-read-command command))))
+  (compile command))
+
+(provide 'init)
+;;; init.el ends here
