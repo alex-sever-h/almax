@@ -381,8 +381,11 @@
 
 (use-package magit
   :init 
-  (use-package magit-rockstar)
-  (use-package magit-gh-pulls))
+  (use-package magit-gh-pulls)
+  (use-package magit-filenotify)
+  (use-package magit-find-file)
+  (use-package magithub)
+)
 
 (use-package arduino-mode
   :config
