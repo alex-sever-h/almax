@@ -460,6 +460,8 @@
 
 (scroll-bar-mode -1)
 
+(global-linum-mode t)
+
 (load-theme 'manoj-dark)
 
 (defun compile-parent (command)
