@@ -334,6 +334,12 @@
 
   (add-hook 'irony-mode-hook 'irony-cdb-autosetup-compile-options)
 
+  (add-to-list 'irony-supported-major-modes 'arduino-mode)
+  (add-to-list 'irony-lang-compile-option-alist '(arduino-mode . "c++"))
+
+  ;; Turn-on irony-mode on arduino-mode (on .ino file).
+  (add-hook 'arduino-mode-hook 'irony-mode)
+  
   ; Load with `irony-mode` as a grouped backend
   (eval-after-load 'flycheck
     '(add-hook 'flycheck-mode-hook #'flycheck-irony-setup))
