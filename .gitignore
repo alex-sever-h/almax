@@ -12,3 +12,6 @@ ede-projects.el
 ido.last
 savehist
 session.*
+tramp
+magithub
+games/snake-scores
