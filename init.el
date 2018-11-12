@@ -479,6 +479,7 @@
                            (shell-quote-argument make-directory))))
      (list (compilation-read-command command))))
   (compile command))
+(global-set-key (kbd "<f9>") 'compile-parent)    ; F7 F8
 
 (setq gdb-delete-out-of-scope nil) ; do not remove watched variables
 (setq gdb-use-colon-colon-notation t) ; do not remove watched variables
