@@ -480,5 +480,11 @@
      (list (compilation-read-command command))))
   (compile command))
 
+(setq gdb-delete-out-of-scope nil) ; do not remove watched variables
+(setq gdb-use-colon-colon-notation t) ; do not remove watched variables
+(setq gdb-speedbar-auto-raise t)
+
+
+
 (provide 'init)
 ;;; init.el ends here
