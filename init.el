@@ -16,8 +16,14 @@
 (setq package-enable-at-startup nil)
 (setq use-package-verbose t)
 (setq use-package-always-ensure t)
-(add-to-list 'package-archives
-             '("melpa" . "https://melpa.org/packages/"))
+
+(add-to-list 'package-archives '("gnu" . "https://elpa.gnu.org/packages/"))
+(add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/"))
+(add-to-list 'package-archives '("melpa-stable" . "https://stable.melpa.org/packages/"))
+
+(setq package-pinned-packages
+      '((rtags                 . "melpa-stable")))
+
 (package-initialize)
 ;; Bootstrap use-package
 (unless (package-installed-p 'use-package)
