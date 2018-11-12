@@ -365,6 +365,7 @@
   (setq ecb-show-sources-in-directories-buffer 'always)
   (setq ecb-compile-window-height 5)
   (setq ecb-windows-width 35)
+  (global-set-key (kbd "<f5>") 'ecb-minor-mode)    ; F7 F8
   )
 
 (use-package crux)
