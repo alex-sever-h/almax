@@ -394,7 +394,7 @@
 
 (use-package magit
   :init 
-  (use-package magit-gh-pulls)
+;  (use-package magit-gh-pulls)
   (use-package magit-filenotify)
   (use-package magit-find-file)
   (use-package magithub)
