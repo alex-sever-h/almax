@@ -399,6 +399,7 @@
   (use-package magit-find-file)
   (use-package magithub)
 )
+(use-package groovy-mode)
 
 (use-package arduino-mode
   :config
