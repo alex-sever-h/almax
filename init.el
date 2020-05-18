@@ -400,6 +400,7 @@
   (use-package magithub)
 )
 (use-package groovy-mode)
+(use-package yaml-mode)
 
 (use-package arduino-mode
   :config
