@@ -468,10 +468,9 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(ecb-options-version "2.50")
- '(flycheck-display-errors-function (function flycheck-pos-tip-error-messages))
+ '(flycheck-display-errors-function #'flycheck-pos-tip-error-messages)
  '(package-selected-packages
-   (quote
-    (w3 2048-game magit-filenotify magit-find-file magit-gh-pulls magit rtags avy key-chord guide-key use-package))))
+   '(w3 2048-game magit-filenotify magit-find-file magit-gh-pulls magit rtags avy key-chord guide-key use-package)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
