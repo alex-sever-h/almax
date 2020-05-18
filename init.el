@@ -420,6 +420,11 @@
       (message "Copied buffer file name '%s' to the clipboard." filename))))
 
 
+(use-package company-jedi
+  :config
+  (eval-after-load 'company
+    '(add-to-list 'company-backends 'company-jedi)))
+
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; CEDET ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
