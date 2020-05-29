@@ -52,3 +52,14 @@
 ;;
 ;; You can also try 'gd' (or 'C-c g d') to jump to their definition and see how
 ;; they are implemented.
+
+(map!
+      ;;; smartparens
+      (:after smartparens
+        :map smartparens-mode-map
+        "C-<right>" nil
+        "M-<right>" nil
+        "C-<left>"  nil
+        "M-<left>"  nil
+        )
+)
